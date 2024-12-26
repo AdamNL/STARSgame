@@ -10,7 +10,7 @@ class Settings:
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (230, 230, 230)
-        self.bullet_allowed = 10
+        self.bullet_allowed = 20
 
         self.ship_speed = 3
         self.ship_limit = 3

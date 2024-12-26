@@ -7,6 +7,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
+from button import Button
 
 class STARS:
 
@@ -28,6 +29,10 @@ class STARS:
         self.alien = pygame.sprite.Group()
 
         self._create_fleet()
+
+        self.play_button = Button(self, "Play")
+
+        self.game_active = False
 
     def run_game(self):
         while True:
@@ -54,6 +59,10 @@ class STARS:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = True
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = True
         elif event.key == pygame.K_q:
             sys.exit()
         elif event.key == pygame.K_SPACE:
@@ -64,7 +73,10 @@ class STARS:
                     self.ship.moving_right = False
                 elif event.key == pygame.K_LEFT:
                     self.ship.moving_left = False
-
+                elif event.key == pygame.K_UP:
+                    self.ship.moving_up = False
+                elif event.key == pygame.K_DOWN:
+                    self.ship.moving_down = False
     def _create_fleet(self):
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
@@ -139,6 +151,9 @@ class STARS:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.alien.draw(self.screen)
+
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         pygame.display.flip()
 
